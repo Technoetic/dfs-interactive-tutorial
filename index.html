@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFS 깊이 우선 탐색 인터랙티브 튜토리얼</title>
+  <meta name="description" content="깊이 우선 탐색(DFS) 알고리즘을 단계별로 배우는 인터랙티브 튜토리얼입니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-Ce-tr6q7.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-eZxBwc3o.css">
+</head>
+<body>
+  <div id="app" class="app-layout">
+    <!-- 헤더 (row 1) -->
+    <header class="app-header" role="banner">
+      <h1 class="app-title">DFS 깊이 우선 탐색</h1>
+      <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="튜토리얼 진행률">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <span class="step-indicator" id="step-indicator" aria-live="polite">Step 0 / 7</span>
+    </header>
+
+    <!-- 컨트롤 바 (row 2) -->
+    <div class="control-bar" role="toolbar" aria-label="재생 컨트롤">
+      <div class="control-group">
+        <button type="button" id="btn-first" class="btn-control" aria-label="처음으로" title="처음으로">⏮</button>
+        <button type="button" id="btn-prev" class="btn-control" aria-label="이전 단계" title="이전 단계">◀</button>
+        <button type="button" id="btn-play" class="btn-control btn-play" aria-label="재생" aria-pressed="false" title="재생/일시정지">▶</button>
+        <button type="button" id="btn-next" class="btn-control" aria-label="다음 단계" title="다음 단계">▶</button>
+        <button type="button" id="btn-last" class="btn-control" aria-label="마지막으로" title="마지막으로">⏭</button>
+      </div>
+      <div class="control-group">
+        <label for="speed-slider" class="speed-label">속도</label>
+        <input type="range" id="speed-slider" class="speed-slider"
+          min="0.5" max="3" step="0.5" value="1"
+          role="slider" aria-valuenow="1" aria-valuemin="0.5" aria-valuemax="3"
+          aria-label="애니메이션 속도 (0.5x ~ 3x)" />
+        <span id="speed-display" class="speed-display">1x</span>
+      </div>
+      <div class="control-group">
+        <button type="button" id="btn-reset" class="btn-control btn-reset" aria-label="초기화" title="초기화">↺</button>
+        <select id="scenario-select" class="scenario-select" aria-label="시나리오 선택">
+          <option value="0">데모</option>
+          <option value="1">기본 탐색</option>
+          <option value="2">역추적</option>
+          <option value="3">사이클 감지</option>
+          <option value="4">인접 리스트</option>
+          <option value="5">웹 크롤러</option>
+          <option value="6">챌린지</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 메인 영역 (row 3) -->
+    <main class="app-main" role="main">
+      <!-- 그래프 패널 -->
+      <section class="panel panel-graph" aria-label="그래프 시각화">
+        <div class="panel-title">그래프</div>
+        <svg id="graph-svg" class="graph-canvas" role="application" aria-label="DFS 탐색 그래프" tabindex="0">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="var(--edge-default)" />
+            </marker>
+          </defs>
+          <g id="edges-layer"></g>
+          <g id="nodes-layer"></g>
+        </svg>
+        <!-- 스택 시각화 -->
+        <div class="stack-panel" aria-label="DFS 스택">
+          <div class="stack-title">스택</div>
+          <div id="stack-display" class="stack-display" role="list" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- 코드 패널 -->
+      <section class="panel panel-code" aria-label="알고리즘 코드">
+        <div class="panel-title">의사코드</div>
+        <pre class="code-block" id="pseudocode" role="code" aria-live="polite">
+<code id="code-lines"><span class="code-line" data-line="0">function dfs(graph, start):</span>
+<span class="code-line" data-line="1">  stack = [start]</span>
+<span class="code-line" data-line="2">  while stack is not empty:</span>
+<span class="code-line" data-line="3">    node = stack.pop()</span>
+<span class="code-line" data-line="4">    if node not visited:</span>
+<span class="code-line" data-line="5">      mark node as visited</span>
+<span class="code-line" data-line="6">      for neighbor in graph[node]:</span>
+<span class="code-line" data-line="7">        stack.push(neighbor)</span>
+</code>
+        </pre>
+      </section>
+
+      <!-- 설명 패널 -->
+      <section class="panel panel-description" aria-label="단계 설명">
+        <div class="panel-title">설명</div>
+        <div id="description-text" class="description-text" aria-live="polite"></div>
+        <div class="real-world-example" id="real-world-example"></div>
+      </section>
+    </main>
+
+  </div>
+
+</body>
+</html>
