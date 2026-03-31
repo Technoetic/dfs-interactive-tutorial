@@ -1,0 +1,275 @@
+/* layout.css — App Layout (Khan/Stripe/Duolingo Awwwards patterns) */
+
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+	font-family: var(--font-body);
+	background: var(--bg-primary);
+	color: var(--text-primary);
+}
+
+/* Desktop grid ≥1024px */
+.app-layout {
+	display: grid;
+	grid-template-rows: 56px 64px 1fr 48px;
+	height: 100vh;
+	overflow: hidden;
+	background: var(--bg-secondary);
+}
+
+/* Main area — 3-column grid, row 3 */
+.app-main {
+	grid-row: 3;
+	display: grid;
+	grid-template-columns: 50fr 28fr 22fr;
+	overflow: hidden;
+	gap: 0;
+	min-height: 0;
+}
+
+/* Header — row 1, all columns */
+.app-header {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 var(--space-lg);
+	background: var(--bg-primary);
+	border-bottom: 1px solid var(--border-light);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	box-shadow: var(--shadow-sm);
+}
+
+.header-logo {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--text-primary);
+	letter-spacing: -0.01em;
+}
+.header-logo span {
+	color: var(--accent);
+}
+
+.header-progress {
+	flex: 1;
+	max-width: 200px;
+	height: 4px;
+	background: var(--bg-panel);
+	border-radius: var(--radius-full);
+	overflow: hidden;
+	margin: 0 var(--space-lg);
+}
+.header-progress-fill {
+	height: 100%;
+	background: var(--accent);
+	border-radius: var(--radius-full);
+	transition: width var(--transition-base);
+}
+.header-step-label {
+	font-size: 13px;
+	color: var(--text-muted);
+	white-space: nowrap;
+}
+.header-actions {
+	display: flex;
+	gap: var(--space-sm);
+	align-items: center;
+}
+
+/* Control bar — row 2, all columns */
+.control-bar {
+	grid-column: 1 / -1;
+	grid-row: 2;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 var(--space-lg);
+	background: var(--bg-primary);
+	border-bottom: 1px solid var(--border-light);
+	gap: var(--space-md);
+	position: sticky;
+	top: 56px;
+	z-index: 9;
+}
+
+/* Panel sections inside .app-main */
+.panel-graph {
+	grid-column: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	padding: var(--space-lg);
+	background: var(--bg-primary);
+	overflow: hidden;
+	min-width: 0;
+	min-height: 0;
+}
+
+.panel-code {
+	grid-column: 2;
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-lg);
+	background: var(--bg-primary);
+	border-left: 1px solid var(--border-light);
+	overflow-y: auto;
+	gap: var(--space-md);
+	min-width: 0;
+	min-height: 0;
+}
+
+.panel-description {
+	grid-column: 3;
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-lg);
+	background: var(--bg-primary);
+	border-left: 1px solid var(--border-light);
+	overflow-y: auto;
+	gap: var(--space-md);
+	min-width: 0;
+	min-height: 0;
+}
+
+/* Status footer — row 4, all columns */
+.status-footer {
+	grid-column: 1 / -1;
+	grid-row: 4;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 var(--space-lg);
+	background: var(--bg-secondary);
+	border-top: 1px solid var(--border-light);
+	font-size: 13px;
+	color: var(--text-muted);
+	gap: var(--space-md);
+	overflow: hidden;
+}
+
+/* Panel utility */
+.panel {
+	background: var(--bg-primary);
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-light);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-lg);
+}
+.panel-title {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--text-primary);
+	margin-bottom: var(--space-md);
+	letter-spacing: -0.01em;
+}
+
+.tabs-nav {
+	display: none;
+}
+
+/* Tablet 640–1023px */
+@media (min-width: 640px) and (max-width: 1023px) {
+	.app-main {
+		grid-template-columns: 60fr 40fr;
+	}
+	.panel-code .code-block {
+		font-size: 11.5px;
+	}
+	.panel-description {
+		grid-column: 1 / -1;
+		border-left: none;
+		border-top: 1px solid var(--border-light);
+	}
+	.status-footer {
+		grid-row: 5;
+	}
+}
+
+/* Mobile <640px — Duolingo single-column + tab pattern */
+@media (max-width: 639px) {
+	html,
+	body {
+		overflow: auto;
+	}
+	.app-layout {
+		display: flex;
+		flex-direction: column;
+		height: 100dvh;
+		overflow: hidden;
+	}
+	.app-main {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		overflow-y: auto;
+	}
+	.app-header {
+		flex-shrink: 0;
+	}
+	.control-bar {
+		flex-shrink: 0;
+		flex-wrap: wrap;
+		height: auto;
+		min-height: 64px;
+		padding: var(--space-sm) var(--space-md);
+		gap: var(--space-sm);
+	}
+	.panel-graph {
+		flex: 0 0 auto;
+		width: 100%;
+		height: min(calc(100vw - 32px), 400px);
+		padding: var(--space-md);
+	}
+	.panel-code,
+	.panel-description {
+		display: flex;
+		flex: 0 0 auto;
+		overflow-y: visible;
+		padding: var(--space-md);
+		border: none;
+		border-top: 1px solid var(--border-light);
+	}
+	.tabs-nav {
+		display: flex;
+		flex-shrink: 0;
+		height: 44px;
+		background: var(--bg-primary);
+		border-bottom: 1px solid var(--border-light);
+	}
+	.tabs-nav button {
+		flex: 1;
+		height: 44px;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--text-secondary);
+		border-bottom: 3px solid transparent;
+		background: transparent;
+		transition:
+			color var(--transition-fast),
+			border-color var(--transition-fast);
+	}
+	.tabs-nav button.active {
+		color: var(--accent);
+		font-weight: 700;
+		border-bottom-color: var(--accent);
+	}
+	/* legacy classes removed in Step 054 refactoring */
+	.status-footer {
+		flex-shrink: 0;
+		height: auto;
+		min-height: 40px;
+		padding: var(--space-sm) var(--space-md);
+		font-size: 12px;
+		flex-wrap: wrap;
+	}
+}

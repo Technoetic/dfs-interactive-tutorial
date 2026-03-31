@@ -1,0 +1,10 @@
+{
+  "entry": ["src/main.js"],
+  "project": ["src/**/*.js", "src/**/*.ts"],
+  "ignore": [
+    "playwright-*.js",
+    "step_archive/**",
+    "dist/**",
+    ".claude/**"
+  ]
+}

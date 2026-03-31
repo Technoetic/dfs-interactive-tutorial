@@ -1,0 +1,6 @@
+node_modules/
+dist/
+coverage/
+step_archive/screenshots/
+*.log
+.lighthouseci/
